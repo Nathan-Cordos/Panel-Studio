@@ -8,7 +8,9 @@ Describe the story and shots, add references, then ask **ChatGPT Codex** to crea
 
 Export the page as a **printable A4 or US Letter PDF** with optional crop marks and bleed (3 mm, ⅛ inch, or 5 mm to match your printer’s requirements). An **editable handoff ZIP** includes artwork and caption layers already sized and positioned for import into Photoshop or other image editors, plus source images and editable SVG captions. PDF pages retain a white border and use RGB colour.
 
-![Panel Studio editor](docs/workspace.png)
+![Panel Studio showing a four-shot café sequence, image versions and saved edit controls](docs/readme.png)
+
+The bundled café sequence shows a corrected walking direction. Compare the original and revised artwork, write an edit request, then review the result before exporting. The example artwork was generated in advance.
 
 ## How to use it
 
