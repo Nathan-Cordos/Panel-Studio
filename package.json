@@ -1,0 +1,20 @@
+{
+  "name": "panel-studio",
+  "version": "1.2.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node --env-file-if-exists=.env server.mjs",
+    "test": "node --test",
+    "mcp": "node mcp.mjs",
+    "sync:skill": "node scripts/sync-skill.mjs",
+    "test:browser": "node scripts/browser-qa.mjs",
+    "test:live": "node scripts/live-qa.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "panel-studio",
+  "version": "1.2.0",
+  "description": "Review image sequences and revise saved projects with Codex.",
+  "author": { "name": "Nathan" },
+  "skills": "./skills/",
+  "mcpServers": "./.mcp.json"
+}

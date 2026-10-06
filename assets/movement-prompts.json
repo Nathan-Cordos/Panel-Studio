@@ -1,0 +1,67 @@
+{
+  "date": "2026-10-06",
+  "purpose": "Fictional lifestyle sequence demonstrating movement continuity and targeted image revision.",
+  "entries": [
+    {
+      "id": "P01",
+      "file": "assets/demo-originals/p01.png",
+      "webAsset": "public/art/movement/p01.webp",
+      "prompt": "Use case: ads-marketing, narrative lifestyle campaign. Create ONE photorealistic wide establishing photograph, NOT a comic collage. A fictional adult woman about 30, ordinary natural face, short dark brown bob, mustard-yellow cotton overshirt over white crew-neck T-shirt, charcoal straight-leg trousers, off-white low-top sneakers, carries ONE plain tan canvas tote in her anatomical left hand. She walks naturally LEFT TO RIGHT parallel to the pavement along a quiet European neighborhood storefront, full body in left half, profile facing right, feet and torso truly travel right, never turned toward camera. Destination is a navy-blue framed glass cafe door at the far RIGHT of the image, pale cream plaster storefront, simple dark frame windows, one small outdoor cafe table near the door. Side-on camera across the sidewalk, horizontal pavement joints, late-morning soft daylight from upper left. Wide landscape frame, natural candid photographic texture, understated magazine lifestyle art direction, enough margin above head and below shoes for cropping into a horizontal panel. No brand logos, no signs or legible text, no crowds, no cars blocking pavement, no cigarette or alcohol, no romance or private story references, no borders or baked-in lettering.",
+      "references": [],
+      "generation": "built-in image_gen",
+      "visualFinding": "Establishes rightward movement, the woman’s clothing/tote and destination door.",
+      "approval": "pending human review"
+    },
+    {
+      "id": "P02-original",
+      "file": "assets/demo-originals/p02-before.png",
+      "webAsset": "public/art/movement/p02-before.webp",
+      "prompt": "Use case: ads-marketing narrative lifestyle. Image 1 provides the exact fictional adult woman's identity, clothing, tote and cafe set. Generate ONE separate medium side-on photo of her walking along the SAME pale cream plaster cafe storefront. This is an INTENTIONALLY WRONG-DIRECTION draft for a continuity demo: she now faces and walks toward the LEFT of the image, full torso, hips, leading foot and gaze point LEFT; do not merely turn her head. Keep her short wavy brown bob, mustard cotton overshirt open over white T-shirt, charcoal straight trousers, off-white sneakers, one plain tan canvas tote held in the same camera-side hand. Side camera across sidewalk, full body comfortably in frame with margins; crop to the same wall and navy-framed window, small cafe table and olive planter remain in the background. Late-morning light from upper left. No change to age or identity, no body rotated toward viewer, no logos, text, signs or watermarks. Realistic photograph, wide enough crop margin to fit an almost square story panel. This deliberate LEFT travel contradicts the established RIGHT movement, to be repaired in a sibling image.",
+      "references": [
+        "assets/demo-originals/p01.png"
+      ],
+      "generation": "built-in image_gen",
+      "visualFinding": "Deliberately reverses body, feet and gaze toward the left.",
+      "approval": "pending human review"
+    },
+    {
+      "id": "P02-corrected",
+      "file": "assets/demo-originals/p02-after.png",
+      "webAsset": "public/art/movement/p02-after.webp",
+      "prompt": "Use case: identity-preserve and precise pose correction. Image 1 is the EDIT TARGET. Image 2 is a supporting identity/clothing reference. Correct the walking direction of the woman in image 1: she must face and walk toward the RIGHT, toward the cafe door. Rotate her whole body heading and natural walking stride, including torso, hips, both feet and gaze, to the right; do not merely turn the face, do not mirror the background. Preserve her ordinary adult face, short wavy brown bob, mustard-yellow open overshirt, white T-shirt, charcoal straight trousers, off-white low-top shoes and one tan canvas tote held by her camera-side hand. Keep her in approximately the same position, full body visible with crop margins. Keep the cream plaster wall, navy windows and door on the right, cafe table, chairs, olive planter, pavement, camera location and morning light unchanged. Natural side-profile candid photograph, no eye contact with viewer. Only fix actor direction and corresponding natural pose/contact shadow. No text, logos, extra people, extra bags or borders.",
+      "references": [
+        "assets/demo-originals/p02-before.png",
+        "assets/demo-originals/p01.png"
+      ],
+      "generation": "built-in image_gen",
+      "visualFinding": "Body and stride now face right; storefront is retained rather than mirrored. Compare identity and tote manually.",
+      "approval": "pending human review"
+    },
+    {
+      "id": "P03",
+      "file": "assets/demo-originals/p03.png",
+      "webAsset": "public/art/movement/p03.webp",
+      "prompt": "Use case: ads-marketing narrative lifestyle. Generate ONE separate lower-body detail photograph of the woman from image 1, continuing to walk RIGHT along the SAME cafe sidewalk. Identity/outfit/prop reference: mustard overshirt hem, charcoal straight-leg trousers, off-white low-top sneakers, ONE tan canvas tote carried low by the same camera-side hand. Frame from just above waist to pavement, no head in this shot. Both feet point and stride naturally RIGHT, one foot advancing right. Tote remains visible at the trailing side, same plain tan straps and bag design. Perpendicular side-on camera across the sidewalk at hip height, cream plaster and the lower navy window base behind, same large rectangular pavement slabs and morning daylight from upper left. Preserve realistic proportions and hands with no duplicated limbs. Give ample margin around legs and tote for a portraitish panel crop; central lower-body subject. Wide source photo but full intended waist-to-feet action grouped near center. No logos, no lettering, no signs, no additional people, no watermarks, no borders. Clean natural lifestyle campaign photography.",
+      "references": [
+        "assets/demo-originals/p02-after.png"
+      ],
+      "generation": "built-in image_gen",
+      "visualFinding": "Detail of rightward stride, trousers, sneakers and trailing tote.",
+      "approval": "pending human review"
+    },
+    {
+      "id": "P04",
+      "file": "assets/demo-originals/p04.png",
+      "webAsset": "public/art/movement/p04.webp",
+      "prompt": "Use case: ads-marketing narrative lifestyle. Image 1 is the cafe geography reference; image 2 the accepted woman's identity, outfit and tote reference. Create ONE separate wide photo of the SAME adult woman arriving at the navy-blue framed glass cafe doorway on the RIGHT of the SAME cream storefront. She has progressed along the sidewalk: positioned immediately left of the door, still faces and moves RIGHT, naturally stepping toward the open entrance, torso and gaze toward the doorway, no eye contact with camera. Short wavy brown bob, mustard overshirt, white T-shirt, charcoal trousers, off-white sneakers, ONE plain tan tote held low in the same camera-side hand. Keep the cafe table and two chairs to the LEFT of the doorway, not moved to the right; olive planter stays left of the table; same navy window frame and cream wall, warm interior lamps. Side-on camera across pavement, full person with generous head/shoe crop margins, natural morning daylight from upper left. Wide horizontal layout, not a collage. Real adult candid lifestyle photography, no extra people, logos, readable signs, lettering, borders or watermark. The doorway should read as the destination established in image 1, not a different shop.",
+      "references": [
+        "assets/demo-originals/p01.png",
+        "assets/demo-originals/p02-after.png"
+      ],
+      "generation": "built-in image_gen",
+      "visualFinding": "Progresses to the established doorway; table and planter remain to its left.",
+      "approval": "pending human review"
+    }
+  ],
+  "promptNotes": "Visual instructions are retained; publication context has been omitted."
+}

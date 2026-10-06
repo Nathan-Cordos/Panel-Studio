@@ -1,0 +1,5 @@
+{
+  "mcpServers": {
+    "panel_studio": { "command": "node", "args": ["./mcp.mjs"], "cwd": "." }
+  }
+}

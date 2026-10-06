@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Panel Studio — Sequence review</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="interface.css" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Crect width='40' height='40' rx='10' fill='%23373345'/%3E%3Cpath d='M9 9h22v10H9zm0 14h9v8H9zm13 0h9v8h-9z' fill='%23ded2ff'/%3E%3C/svg%3E"
+    />
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="/"
+        ><span class="logo">▦</span> Panel Studio
+        <small>CAMPAIGN REVIEW</small></a
+      >
+      <div>
+        <button id="settingsButton" class="quiet">Settings</button
+        ><button id="export" class="dark">Export page ↗</button>
+      </div>
+    </header>
+    <div class="shell">
+      <nav class="rail">
+        <span class="rail-title">PROJECT</span
+        ><strong id="projectName">A walk to the café</strong
+        ><span id="projectKind" class="muted">Example project</span
+        ><button class="nav-item active">▦ &nbsp; Contact sheet</button
+        ><button id="compare" class="nav-item">◫ &nbsp; Before & after</button
+        ><button id="save" class="nav-item">↓ &nbsp; Download JSON</button
+        ><button id="openProject" class="nav-item">↑ &nbsp; Open project</button
+        ><label
+          class="nav-item file-label"
+          tabindex="0"
+          role="button"
+          aria-label="Import JSON"
+          >↑ &nbsp; Import JSON<input
+            id="open"
+            type="file"
+            accept="application/json"
+            hidden
+        /></label>
+        <div class="rail-bottom">
+          <span class="dot"></span> Manual review
+          <p>Check every image<br />before exporting.</p>
+        </div>
+      </nav>
+      <main>
+        <div class="project-toolbar">
+          <button id="projects" class="quiet">Projects</button
+          ><button id="newProject" class="quiet">New project</button
+          ><button id="projectSettings" class="quiet">Project settings</button
+          ><button id="saveChanges" class="dark">Save changes</button
+          ><span id="syncState" role="status"
+            >Example · save to work with Codex</span
+          ><button id="reloadProject" class="quiet" hidden>
+            Load latest saved version
+          </button>
+        </div>
+        <p id="projectLocation" class="project-location muted"></p>
+        <div class="topline">
+          <div>
+            <span class="eyebrow">VISUAL SEQUENCE / 4 SHOTS</span>
+            <h1 id="projectHeading">Sequence review</h1>
+            <p id="projectContext" class="muted">
+              Select an image to edit it. Compare versions, complete the review,
+              then export.
+            </p>
+          </div>
+          <div class="layout-buttons">
+            <button
+              id="compareTop"
+              class="quiet"
+              aria-expanded="false"
+              aria-controls="comparison"
+            >
+              Compare</button
+            ><button id="rough" class="quiet">Original draft</button
+            ><button id="repair" class="accent">Load corrected example</button>
+          </div>
+        </div>
+        <div id="status" role="status" aria-live="polite">
+          Start a new project or explore the example. Save a request, then ask
+          Codex to resolve it.
+        </div>
+        <ol class="workflow" aria-label="Review workflow">
+          <li><b>1</b> Select a shot</li>
+          <li><b>2</b> Describe the edit</li>
+          <li><b>3</b> Compare versions</li>
+          <li><b>4</b> Review & export</li>
+        </ol>
+        <div class="mobile-project-controls">
+          <button id="saveTop" class="quiet">Download JSON</button
+          ><button id="openTop" class="quiet">Open project</button>
+        </div>
+        <div class="editor">
+          <section class="canvas-area">
+            <div class="canvas-heading">
+              <span id="pageState">Original draft</span
+              ><span id="zoom">4 images · contact sheet</span>
+            </div>
+            <div id="page" class="page tidy"></div>
+            <div class="canvas-footer">
+              <span
+                >Select an image to see its versions and review checklist.</span
+              ><button id="layout" class="text-button">Align layout</button>
+            </div>
+            <div id="comparison" hidden>
+              <button id="backToSheet" class="quiet">
+                Back to contact sheet
+              </button>
+              <div class="selected-comparison">
+                <h3>Selected shot · original / current</h3>
+                <div>
+                  <figure>
+                    <img id="selectedBefore" alt="Original selected shot" />
+                    <figcaption>Original</figcaption>
+                  </figure>
+                  <figure>
+                    <img id="selectedAfter" alt="Current selected shot" />
+                    <figcaption>Current version</figcaption>
+                  </figure>
+                </div>
+              </div>
+              <div>
+                <h3>Original draft</h3>
+                <canvas id="beforeCanvas"></canvas>
+              </div>
+              <div>
+                <h3>Current page</h3>
+                <canvas id="afterCanvas"></canvas>
+              </div>
+            </div>
+          </section>
+          <aside>
+            <div class="inspector-head">
+              <span class="eyebrow">SELECTED IMAGE</span
+              ><span id="panelId" class="pill">P02</span>
+            </div>
+            <h2 id="panelTitle"></h2>
+            <p id="panelBeat" class="muted"></p>
+            <details class="shot-details">
+              <summary>Shot brief and references</summary>
+              <label for="shotTitle">Shot name</label
+              ><input id="shotTitle" maxlength="200" /><label for="shotType"
+                >Framing</label
+              ><select id="shotType">
+                <option>Wide</option>
+                <option>Medium</option>
+                <option>Close-up</option>
+                <option>Detail</option></select
+              ><label for="shotBrief">What happens in this shot?</label
+              ><textarea id="shotBrief" maxlength="12000"></textarea>
+              <div id="shotReferences"></div>
+            </details>
+            <p id="selectedIssue" class="issue"></p>
+            <div id="geometry" class="geometry"></div>
+            <div id="versions" class="versions"></div>
+            <label for="instruction">Edit instruction</label
+            ><textarea
+              id="instruction"
+              placeholder="Describe what to create or change, and what should stay the same."
+            ></textarea>
+            <button id="queueRequest" class="dark full">
+              Save request for Codex
+            </button>
+            <p class="muted">
+              Then ask Codex to resolve the pending requests. Keep this editor
+              open to see results.
+            </p>
+            <details>
+              <summary>Generate here with an API key</summary>
+              <div class="two-buttons">
+                <button id="edit" class="accent">Generate revision</button
+                ><button id="generate" class="quiet">Generate new</button>
+              </div>
+            </details>
+            <button id="codexBrief" class="text-button codex-brief">
+              Copy project request
+            </button>
+            <label
+              class="upload"
+              tabindex="0"
+              role="button"
+              aria-label="Upload image"
+              >Upload image
+              <input
+                id="upload"
+                type="file"
+                accept="image/png,image/jpeg,image/webp"
+                hidden
+              /><span>↑</span></label
+            ><label for="caption">Caption</label><input id="caption" />
+            <div class="crop">
+              <label for="focal">Crop focus</label
+              ><input id="focal" type="range" min="0" max="100" value="50" />
+            </div>
+            <div class="review-head">
+              <h2>Image review</h2>
+              <button id="review" class="text-button">
+                Check contact sheet
+              </button>
+            </div>
+            <p class="muted">
+              Check the selected image against the project criteria. Edit these
+              in Project settings.
+            </p>
+            <div id="checks"></div>
+            <button id="approve" class="dark full">Approve image</button>
+            <div id="findings"></div>
+            <div class="review-head">
+              <h2>Saved requests</h2>
+              <span id="requestCount" class="muted"></span>
+            </div>
+            <div id="requestList"></div>
+          </aside>
+        </div>
+      </main>
+    </div>
+    <dialog id="settings">
+      <form method="dialog">
+        <button class="close" formnovalidate aria-label="Close settings">
+          ×</button
+        ><span class="eyebrow">LIVE AI</span>
+        <h2>Connect OpenAI</h2>
+        <p>
+          Connect OpenAI to review the page or generate a panel revision. The
+          demo works without a key.
+        </p>
+        <label for="apiKey">OpenAI API key</label
+        ><input
+          id="apiKey"
+          type="password"
+          placeholder="sk-…"
+          autocomplete="off"
+        />
+        <p class="muted">
+          Kept in this tab’s memory. Selected images and instructions are sent
+          to OpenAI only when you use an AI action. Usage is billed to your
+          account.
+        </p>
+        <button class="accent full">Save settings</button>
+      </form>
+    </dialog>
+    <dialog
+      id="exportDialog"
+      class="export-dialog"
+      aria-labelledby="exportTitle"
+    >
+      <button id="closeExport" class="close" aria-label="Close export">
+        ×
+      </button>
+      <span class="eyebrow">DELIVERY</span>
+      <h2 id="exportTitle">Export your sequence</h2>
+      <div class="export-grid">
+        <div>
+          <label for="exportFormat">Format</label
+          ><select id="exportFormat">
+            <option value="png">Screen image · PNG</option>
+            <option value="pdf">Print layout · PDF</option>
+            <option value="zip">Editable handoff · ZIP</option>
+          </select>
+          <p id="exportDescription" class="muted"></p>
+          <div id="resolutionOptions">
+            <label for="exportWidth">Canvas width</label
+            ><select id="exportWidth">
+              <option value="1000">1,000 px · compact</option>
+              <option value="2000" selected>2,000 px · standard</option>
+              <option value="3000">3,000 px · large</option>
+            </select>
+          </div>
+          <div id="printOptions" hidden>
+            <label for="paperSize">Finished paper size</label
+            ><select id="paperSize">
+              <option value="a4">A4 · 210 × 297 mm</option>
+              <option value="letter">US Letter · 8.5 × 11 in</option>
+            </select>
+            <label for="bleed">Bleed on each edge</label
+            ><select id="bleed">
+              <option value="0">None</option>
+              <option value="3" selected>3 mm · common metric setting</option>
+              <option value="3.175">⅛ inch · 3.175 mm</option>
+              <option value="5">5 mm · if required by your printer</option>
+            </select>
+            <label class="check-option"
+              ><input id="cropMarks" type="checkbox" checked /> Include crop
+              marks</label
+            >
+          </div>
+          <p id="resolutionNote" class="muted"></p>
+          <p id="exportReview" role="status" class="notice"></p>
+          <button id="downloadExport" class="dark full">Download export</button>
+        </div>
+        <figure>
+          <canvas id="exportPreview" aria-label="Export preview"></canvas>
+          <figcaption id="previewLegend"></figcaption>
+        </figure>
+      </div>
+    </dialog>
+    <dialog id="libraryDialog" aria-labelledby="libraryTitle">
+      <button id="closeLibrary" class="close" aria-label="Close projects">
+        ×
+      </button>
+      <h2 id="libraryTitle">Your projects</h2>
+      <p class="muted">
+        Saved on this computer. Codex reads the same projects through MCP.
+      </p>
+      <p id="libraryLocation" class="muted project-location"></p>
+      <div id="projectLibrary"></div>
+      <button id="loadExample" class="quiet">Create a café example</button>
+    </dialog>
+    <dialog
+      id="projectDialog"
+      class="project-dialog"
+      aria-labelledby="projectFormTitle"
+    >
+      <button
+        id="closeProject"
+        class="close"
+        aria-label="Close project settings"
+      >
+        ×
+      </button>
+      <h2 id="projectFormTitle">New project</h2>
+      <form id="projectForm">
+        <div id="saveFolderChoice">
+          <label>Save folder</label>
+          <div class="folder-choice">
+            <output id="saveFolder" class="muted"></output
+            ><button id="chooseProjectFolder" type="button" class="quiet">
+              Choose folder…
+            </button>
+          </div>
+          <p class="muted">
+            The project file includes your artwork, versions and requests.
+          </p>
+        </div>
+        <label for="projectTitleInput">Project name</label
+        ><input
+          id="projectTitleInput"
+          required
+          maxlength="200"
+          placeholder="For example, Saturday market campaign"
+        />
+        <label for="storyInput">Story or sequence</label
+        ><textarea
+          id="storyInput"
+          maxlength="12000"
+          placeholder="What happens from the first image to the last? Who or what should stay consistent?"
+        ></textarea>
+        <div class="form-pair">
+          <div>
+            <label for="layoutPreset">Page layout · four shots</label
+            ><select id="layoutPreset">
+              <option value="tidy">Establish, two details, finish</option>
+              <option value="grid">Four equal panels · 2 × 2</option>
+              <option value="strips">Four wide strips</option>
+            </select>
+          </div>
+          <div>
+            <label for="stylePreset">Art style starting point</label
+            ><select id="stylePreset">
+              <option value="">Choose or describe your own</option>
+              <option>Natural editorial photography</option>
+              <option>Cinematic photography with muted colours</option>
+              <option>Flat editorial illustration</option>
+              <option>Ink and watercolour illustration</option>
+              <option>Black-and-white comic art</option>
+            </select>
+          </div>
+        </div>
+        <label for="styleInput">Art direction</label
+        ><textarea
+          id="styleInput"
+          maxlength="12000"
+          placeholder="Describe lighting, palette, materials, technique and any details to avoid."
+        ></textarea>
+        <h3>Plan the shots</h3>
+        <p class="muted">
+          Describe each moment. You can refine framing and reference choices in
+          the editor.
+        </p>
+        <div id="shotPlan" class="form-pair"></div>
+        <h3>Reference images</h3>
+        <p class="muted">
+          Up to six PNG, JPEG or WebP images, 5 MB each. Explain what each
+          reference should guide: identity, setting, style or an object.
+        </p>
+        <input
+          id="referenceFiles"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          multiple
+          aria-label="Add reference images"
+        />
+        <div id="projectReferences"></div>
+        <details>
+          <summary>Review criteria</summary>
+          <p class="muted">
+            Replace these with specific requirements when needed. They apply to
+            each shot; Codex can read them with the brief.
+          </p>
+          <label for="criterion-orientation">Composition and action</label
+          ><input id="criterion-orientation" maxlength="1000" /><label
+            for="criterion-continuity"
+            >Continuity and references</label
+          ><input id="criterion-continuity" maxlength="1000" /><label
+            for="criterion-crop"
+            >Crop</label
+          ><input id="criterion-crop" maxlength="1000" /><label
+            for="criterion-lettering"
+            >Lettering</label
+          ><input id="criterion-lettering" maxlength="1000" />
+        </details>
+        <p id="projectFormError" role="alert" class="error"></p>
+        <button id="submitProject" class="dark full">Save project</button>
+      </form>
+    </dialog>
+    <dialog
+      id="folderBrowser"
+      aria-labelledby="folderBrowserTitle"
+      class="folder-browser"
+    >
+      <button
+        id="closeFolderBrowser"
+        class="close"
+        aria-label="Close folder browser"
+      >
+        ×
+      </button>
+      <h2 id="folderBrowserTitle">Choose save folder</h2>
+      <p id="folderBrowserHelp" class="muted"></p>
+      <form id="browseFolderForm" class="folder-path-form">
+        <label for="browseFolderPath">Folder path</label>
+        <div class="folder-choice">
+          <input
+            id="browseFolderPath"
+            autocomplete="off"
+            spellcheck="false"
+            required
+          /><button class="quiet">Go</button>
+        </div>
+      </form>
+      <div class="folder-choice">
+        <button id="folderUp" class="quiet">Up one folder</button>
+        <div id="folderDrives"></div>
+      </div>
+      <p id="folderBrowserError" class="error" role="status"></p>
+      <div id="folderEntries" class="folder-entries"></div>
+      <button id="useFolder" class="dark full">Use this folder</button>
+    </dialog>
+    <script src="vendor/pdf-lib.min.js"></script>
+    <script src="vendor/jszip.min.js"></script>
+    <script type="module" src="app.js"></script>
+  </body>
+</html>

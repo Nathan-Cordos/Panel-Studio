@@ -1,0 +1,4 @@
+interface:
+  display_name: "Panel Studio"
+  short_description: "Review image sequences and compare targeted revisions"
+  default_prompt: "Use $panel-studio to inspect my saved image sequence, correct the selected shot, and prepare a visual review."

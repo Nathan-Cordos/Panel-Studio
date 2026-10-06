@@ -1,0 +1,25 @@
+# Validation
+
+Checked on 2026-10-06 with Node 22 and Chromium.
+
+- Unit tests pass for review gates, invalidating approval after revisions, preserving original artwork, JSON round trips and unsafe project rejection.
+- HTTP tests pass for page review and reference-image edit contracts with a mocked OpenAI upstream. MCP tests verify initialization, tool discovery, native WebP/PNG image responses, sibling-version attachment, approval invalidation and stale-write rejection.
+- Browser checks pass for loading the saved correction, approval prerequisites, caption invalidation, version comparison, saved project restore, stale revision rejection, page export, missing-key failure and mobile layout without horizontal overflow.
+- Desktop screenshots and the actual exported page were opened and visually inspected.
+- The Codex skill passes the bundled skill validator. The repo/plugin copies match. The local marketplace was registered and the plugin installed successfully with Codex CLI in an isolated CODEX_HOME under the workspace. The user's global plugin settings were not changed.
+
+Four independent lifestyle images plus the direction-correction edit were generated with the built-in image tool. Originals, visual generation instructions, reference roles and visual findings are preserved in assets/movement-prompts.json. The actual assembled page and each source image were opened and inspected. The walking direction, tote, outfit, storefront and crops were checked; human approval remains pending.
+
+No successful paid app API call was performed. New image edits and contact-sheet reviews through the app need a run with the user's API key. CLI plugin installation and the server protocol are verified; loading the plugin in a fresh desktop conversation is a separate host-level check.
+
+Usability review: comparison scrolls into view with a return control, unchecked approval immediately updates the sheet and inspector, file actions support the keyboard, and the crop checklist accommodates detail shots. Browser regressions cover the review and comparison transitions. Desktop and mobile screenshots were regenerated. This was an implementation review, not a study with external users.
+
+Export checks: selected-resolution PNG dimensions; PDF A4 TrimBox, 3 mm BleedBox and larger media area; portable ZIP with all versions embedded; transparent caption layer alpha; source PNGs and layout coordinates. Reassembling the eight layers on white matched the preview within less than 0.004 average channel levels (8-bit). The print PDF was rendered with Poppler and visually inspected. Geometry tests also cover US Letter with no bleed or marks. No Photoshop application import or physical print proof was performed.
+
+Live-project checks: a separate temporary project was created through the UI with a story, layout, style, four briefs and a role-labelled reference. The real stdio MCP process read its request and reference, claimed the work and attached a fixture image as a sibling version. The browser refreshed automatically, retained pending human approval, and returned a page preview matching the saved revision. Stale writes were rejected; a remote update did not overwrite an unsaved local caption. Reloading restored saved content. Desktop and mobile project forms were visually inspected, with no horizontal overflow. Reference-file extraction and multi-reference upstream payloads are covered. The fixture attachment checks integration only, not generation quality. Run `npm run test:live` to reproduce.
+
+Print-setting review: 3 mm remains the common metric default, with an exact ⅛ inch (3.175 mm) option for US printer specifications and 5 mm for recipient-specific requirements. Geometry tests cover the imperial option. Unit, browser/export and live MCP checks passed again; the actual A4 PDF was rendered and inspected with crop marks outside the bleed and a clean white page border. The PNG and layered handoff were generated and their structure checked. The page is intentionally bordered, not edge-to-edge artwork; colour remains RGB. No new paid generation or Photoshop import was performed.
+
+Project locations: custom-folder creation, saving, request completion, local-edit protection and reopening the same project file passed the live workflow checks. The registry retains project IDs for MCP and original default-folder projects remain supported. Browser and export regressions passed; screenshots were inspected. Folder selection is stubbed in automated browser tests; the native Windows helper was syntax-checked. New projects show their selected folder, the editor shows the full saved path, and Open project starts in the default storage folder.
+
+Folder-browser regression: the separate Windows dialog was replaced with an in-app directory browser. Browser tests now use real directory listings to choose a save folder and reopen its project file, verify Open project starts in the default folder, and recover after entering a nonexistent path. Folder requests have a timeout and visible error state. This replaces the earlier stubbed native-dialog check.

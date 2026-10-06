@@ -1,0 +1,9 @@
+.env
+node_modules/
+*.log
+*.lock
+*.tmp
+
+output/
+
+data/

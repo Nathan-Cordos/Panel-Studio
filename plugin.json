@@ -1,0 +1,35 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "panel-studio",
+  "version": "1.2.0",
+  "description": "Review image sequences, compare revisions and update saved Panel Studio projects with Codex.",
+  "author": {
+    "name": "Nathan"
+  },
+  "keywords": [
+    "storyboard",
+    "continuity",
+    "marketing",
+    "image-review"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Panel Studio",
+        "shortDescription": "Image sequence review and revision",
+        "longDescription": "Resolve saved requests using project briefs and references, attach image revisions, and inspect the updated page before human review.",
+        "developerName": "Nathan",
+        "category": "Productivity",
+        "capabilities": [
+          "Read",
+          "Write"
+        ],
+        "defaultPrompt": [
+          "Resolve the pending requests in my Panel Studio project.",
+          "Inspect the current page against its story and review criteria."
+        ],
+        "brandColor": "#343c39"
+      }
+    }
+  }
+}
